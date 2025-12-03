@@ -30,5 +30,6 @@ func start(taskList []models.Task) string {
 	} else {
 		fmt.Println("Invalid input")
 	}
+
 	return start(taskList)
 }
