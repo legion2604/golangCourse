@@ -8,8 +8,7 @@ import (
 )
 
 const (
-	layoutISO = "2006-01-02"
-	layoutUS  = "January 2, 2006"
+	layoutISO = "Jan 2 15:04:05"
 )
 
 type task struct {
@@ -32,8 +31,7 @@ func start(taskList []task) string {
 	if input == 1 {
 		fmt.Println("Input task description:")
 		desc := Print()
-		date := "1999-12-31"
-		time.Parse(layoutISO, date)
+		date := time.Now().Format(layoutISO)
 		newTask := task{description: desc, status: false, createdAt: date}
 		taskList = append(taskList, newTask)
 		fmt.Println("Task added!")
