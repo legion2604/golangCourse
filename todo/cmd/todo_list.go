@@ -17,17 +17,22 @@ func start(taskList []models.Task) string {
 	var input int
 	fmt.Scan(&input)
 
-	if input == 1 {
+	switch input {
+	case 1:
+
 		service.AddTask(&taskList)
-	} else if input == 2 {
+	case 2:
 		service.ViewTasks(taskList)
-	} else if input == 3 {
+	case 3:
+
 		service.CompleteTask(&taskList)
-	} else if input == 4 {
+	case 4:
+
 		service.DeleteTask(&taskList)
-	} else if input == 5 {
+	case 5:
 		return "Bye!"
-	} else {
+	default:
+
 		fmt.Println("Invalid input")
 	}
 
