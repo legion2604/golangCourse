@@ -19,20 +19,16 @@ func start(taskList []models.Task) string {
 
 	switch input {
 	case 1:
-
 		service.AddTask(&taskList)
 	case 2:
 		service.ViewTasks(taskList)
 	case 3:
-
 		service.CompleteTask(&taskList)
 	case 4:
-
 		service.DeleteTask(&taskList)
 	case 5:
 		return "Bye!"
 	default:
-
 		fmt.Println("Invalid input")
 	}
 
