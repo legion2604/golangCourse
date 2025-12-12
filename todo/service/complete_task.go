@@ -13,7 +13,6 @@ func CompleteTask(taskList *[]models.Task) error {
 	fmt.Scanln(&num)
 	if num > 0 && num <= len(*taskList) {
 		(*taskList)[num-1].Status = true
-		fmt.Println("Task marked as completed!")
 	} else {
 		err := errors.New("invalid input")
 		return err

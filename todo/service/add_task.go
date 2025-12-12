@@ -22,6 +22,5 @@ func AddTask(taskList *[]models.Task) error {
 	date := time.Now().Format(layoutISO)
 	newTask := models.Task{Description: desc, Status: false, CreatedAt: date}
 	*taskList = append(*taskList, newTask)
-	fmt.Println("Task added!")
 	return nil
 }
