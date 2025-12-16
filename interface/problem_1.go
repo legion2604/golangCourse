@@ -2,7 +2,6 @@ package main
 
 import (
 	"bytes"
-	"fmt"
 	"io"
 	"os"
 )
@@ -31,7 +30,6 @@ func main() {
 	var bufferWriter bytes.Buffer
 	bufferWrapper := &WriteWrapper{write: &bufferWriter}
 	Print(bufferWrapper) // Записывает "Hello, World!" в буфер
-	fmt.Println(bufferWriter.String())
 }
 
 /*
