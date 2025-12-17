@@ -1,42 +1,52 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
 	"io"
 	"os"
 	"strings"
 )
 
-func CountLines(r io.Reader) (int, error) {
-	reader := bufio.NewReader(r)
-	count := 0
+type LineCounter struct {
+	r     io.Reader
+	lines int
+}
 
-	for {
-		line, err := reader.ReadString('\n')
-		if err == io.EOF {
-			if len(line) > 0 { // для последней строки без \n
-				count++
-			}
-			return count, nil
+func (l *LineCounter) Read(p []byte) (int, error) {
+	n, err := l.r.Read(p)
+
+	for _, b := range p[:n] {
+		if b == '\n' {
+			l.lines++
 		}
-		if err != nil {
-			fmt.Println(line)
-			return count, err
-		}
-		count++
 	}
+
+	// Если это конец файла и последняя строка не заканчивается '\n'
+	if err == io.EOF && n > 0 {
+		if p[n-1] != '\n' {
+			l.lines++
+		}
+	}
+
+	return n, err
+}
+
+func PrintLineCount(r io.Reader) {
+	l := &LineCounter{r: r}
+	_, _ = io.Copy(io.Discard, l)
+	fmt.Println("Количество строк:", l.lines)
 }
 
 func main() {
-	a, _ := os.Open("./problem.txt")
-	FileLines, _ := CountLines(a)
-	fmt.Println("Файл:", FileLines)
+	stringLine := strings.NewReader("dog\ncat\ncow\nchicken\n")
+	stringLineCounter := &LineCounter{r: stringLine}
+	PrintLineCount(stringLineCounter)
 
-	StringLines, _ := CountLines(strings.NewReader("one\ntwo\nthree"))
-	fmt.Println("Строка:", StringLines)
+	fileLine, _ := os.Open("./problem.txt")
+	fileLineCounter := &LineCounter{r: fileLine}
+	PrintLineCount(fileLineCounter)
 }
 
 /*
-считывает количество строк из любого источника, реализующего интерфейс io.Reader
+	считывает количество строк из любого источника, реализующего интерфейс io.Reader
 */
