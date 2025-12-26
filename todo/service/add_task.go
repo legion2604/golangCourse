@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"golangCourse/todo/models"
 	"golangCourse/todo/utils"
+	"log"
 	"time"
 )
 
@@ -17,10 +18,12 @@ func AddTask(taskList *[]models.Task) error {
 	desc := utils.Print()
 	if desc == "" {
 		err := errors.New("invalid input")
+		log.Println(err)
 		return err
 	}
 	date := time.Now().Format(layoutISO)
 	newTask := models.Task{Description: desc, Status: false, CreatedAt: date}
 	*taskList = append(*taskList, newTask)
+	log.Println("Задача успешно добавлена")
 	return nil
 }

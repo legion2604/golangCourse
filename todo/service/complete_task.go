@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"golangCourse/todo/models"
+	"log"
 )
 
 func CompleteTask(taskList *[]models.Task) error {
@@ -15,7 +16,9 @@ func CompleteTask(taskList *[]models.Task) error {
 		(*taskList)[num-1].Status = true
 	} else {
 		err := errors.New("invalid input")
+		log.Println(err)
 		return err
 	}
+	log.Println("Статус задачи успешно изменён")
 	return nil
 }

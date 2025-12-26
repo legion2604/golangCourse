@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"golangCourse/todo/models"
+	"log"
 )
 
 func DeleteTask(taskList *[]models.Task) error {
@@ -12,11 +13,13 @@ func DeleteTask(taskList *[]models.Task) error {
 	fmt.Scan(&num)
 	if num > len(*taskList) {
 		err := errors.New("Input task number to delete is greater than the number of tasks")
+		log.Println(err)
 		return err
 	}
 	if num > 0 && num <= len(*taskList) {
 		*taskList = append((*taskList)[:num-1], (*taskList)[num:]...)
 		fmt.Println("Task deleted!")
 	}
+	log.Println("Задача успешно добавлена")
 	return nil
 }
