@@ -1,45 +1,38 @@
-package main
+package start
 
 import (
 	"fmt"
-	"golangCourse/todo/models"
-	"golangCourse/todo/service"
+	"golangCourse/todo/internal/task"
 )
 
-func main() {
-	fmt.Println("Hello it's your ToDo app!")
-	taskList := make([]models.Task, 0)
-	start(taskList)
-}
-
-func start(taskList []models.Task) string {
+func Start(taskList []task.Task) string {
 	fmt.Println("\n", "1. Add Task", "\n", "2. View Tasks", "\n", "3. Complete the task", "\n", "4. Delete Task", "\n", "5. Exit")
 	var input int
 	fmt.Scan(&input)
 	switch input {
 	case 1:
-		err := service.AddTask(&taskList)
+		err := task.AddTask(&taskList)
 		if err != nil {
 			fmt.Println(err)
 		} else {
 			fmt.Println("Task added!")
 		}
 	case 2:
-		err := service.ViewTasks(taskList)
+		err := task.ViewTasks(taskList)
 		if err != nil {
 			fmt.Println(err)
 		} else {
 			fmt.Println("End of task list.")
 		}
 	case 3:
-		err := service.CompleteTask(&taskList)
+		err := task.CompleteTask(&taskList)
 		if err != nil {
 			fmt.Println(err)
 		} else {
 			fmt.Println("Task complete!")
 		}
 	case 4:
-		err := service.DeleteTask(&taskList)
+		err := task.DeleteTask(&taskList)
 		if err != nil {
 			fmt.Println(err)
 		} else {
