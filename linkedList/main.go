@@ -8,11 +8,11 @@ import (
 func main() {
 	arr := LinkedList{}
 	arr.Add(12) // корект
-	fmt.Println(arr)
+	arr.Print()
 	arr.Add(3) // корект
-	fmt.Println(arr)
-	arr.Add("12") // вызывет panic из-за разных типов
-	fmt.Println(arr)
+	arr.Print()
+	arr.Add("24") // вызывет panic из-за разных типов
+	arr.Print()
 }
 
 type LinkedList []Node
@@ -28,7 +28,6 @@ func (l *LinkedList) Add(value any) {
 		*l = append(*l, newValue)
 		return
 	}
-	fmt.Println(reflect.TypeOf((*l)[len(*l)-1].Value))
 	if reflect.TypeOf((*l)[len(*l)-1].Value) != reflect.TypeOf(newValue.Value) {
 		panic("Неправельный тип элемента")
 	}
@@ -40,4 +39,11 @@ func (l *LinkedList) Add(value any) {
 func (l *LinkedList) Remove(index int) {
 	newList := append((*l)[:index], (*l)[index+1:]...)
 	*l = newList
+}
+
+func (l *LinkedList) Print() {
+	for _, node := range *l {
+		fmt.Print(node.Value, " ")
+	}
+	fmt.Println()
 }
