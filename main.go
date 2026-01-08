@@ -1,9 +1,7 @@
 package main
 
-import "golangCourse/gorutine"
-
-var a int
+import "golangCourse/gorutine/bankImitation"
 
 func main() {
-	gorutine.Start()
+	bankImitation.Start()
 }
