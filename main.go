@@ -1,9 +1,7 @@
 package main
 
-import (
-	"golangCourse/gorutine/channel"
-)
+import _map "golangCourse/map"
 
 func main() {
-	channel.StartGeminiChat()
+	_map.Start()
 }
